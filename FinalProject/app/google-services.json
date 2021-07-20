@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "876795761706",
+    "project_id": "finalprojectdb-9aeb8",
+    "storage_bucket": "finalprojectdb-9aeb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876795761706:android:56a8081561ec031c155f53",
+        "android_client_info": {
+          "package_name": "ge.dgoginashvili_gkalandadze.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876795761706-ijao3em5hod97c1dvijmcpaoror3faet.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf11QIrugIFrXHRwS3A83F9gglO5MZNBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876795761706-ijao3em5hod97c1dvijmcpaoror3faet.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
