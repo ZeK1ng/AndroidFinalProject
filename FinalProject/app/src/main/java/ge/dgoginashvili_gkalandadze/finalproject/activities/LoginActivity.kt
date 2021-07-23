@@ -1,5 +1,6 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -68,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
 
     //TODO load new SingUp Activity
     private fun loadSignUpActivity() {
-        return
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 }
