@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">FInalProject</string>
     <string name="helloworld">Hello World!</string>
+    <string name="enterNicknameHint">Enter your nickname</string>
+    <string name="enterPasswordHint">Enter your password</string>
+    <string name="signIn">SIGN  IN</string>
+    <string name="imageContentDesc">none</string>
+    <string name="not_registered">Not Registered?</string>
+    <string name="sign_up">SIGN  UP</string>
 </resources>
