@@ -44,6 +44,11 @@ class LoginActivity : AppCompatActivity() {
         if(!checkValidInputs(name,pass)){
             return
         }
+        checkCredentiasl()
+    }
+
+    private fun checkCredentiasl() {
+        return
     }
 
     private fun checkValidInputs(name: CharSequence, pass: CharSequence): Boolean {
@@ -55,10 +60,7 @@ class LoginActivity : AppCompatActivity() {
             passwordText.error = "Please Enter Password"
             return false
         }
-        if(pass.length <=5 ){
-            passwordText.error = "Password lenght must be 5 or more"
-            return false
-        }
+
         return true
     }
 

@@ -65,10 +65,10 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/roundborder"
         android:textColor="@color/white"
-        android:id="@+id/signinButton"
+        android:id="@+id/signUpBtn"
         android:backgroundTint="@color/signInButton"
         android:text="@string/signIn" />
 
