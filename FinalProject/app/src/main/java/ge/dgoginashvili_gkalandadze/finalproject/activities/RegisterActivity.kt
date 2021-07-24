@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -13,16 +14,19 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
+import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var nameText: EditText
     private lateinit var passwordText: EditText
     private lateinit var workStatus: EditText
     private lateinit var signUpBtn: AppCompatButton
-    private lateinit var dbase: DatabaseReference
+    private lateinit var regPresenter:RegisterPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        regPresenter = RegisterPresenter(this)
         setupComponents()
     }
 
@@ -45,22 +49,16 @@ class RegisterActivity : AppCompatActivity() {
                 .show();
             return
         }
-        initiateSignUp(name,pass,workStatustxt)
+        regPresenter.initiateSignUp(name,pass,workStatustxt)
 
     }
 
-    private fun initiateSignUp(name: CharSequence, pass: CharSequence, workStatustxt: CharSequence) {
-        val newUser = UserData(name.toString(),pass.toString(),workStatustxt.toString())
-        dbase = Firebase.database.getReference("Users")
-        dbase.child(name.toString()).setValue(newUser).addOnSuccessListener {
-            Toast.makeText(getApplicationContext(), "Profile created successfully", Toast.LENGTH_SHORT)
-                .show();
-//            val intent = Intent(this, profilePageActivity::class.java)
-//            startActivity(intent)
-        }.addOnFailureListener{
-            Toast.makeText(getApplicationContext(), "Failed to create Profile", Toast.LENGTH_SHORT)
-                .show();
-        }
+    fun logSuccess(){
+        Log.d("SuccessRegister","1")
+    }
+    fun logFail(){
+        Log.d("FailedRegister","0")
+
     }
 
     private fun checkValidInputs(
@@ -84,7 +82,6 @@ class RegisterActivity : AppCompatActivity() {
             passwordText.error = "Password lenght must be 5 or more"
             return false
         }
-
         return true
     }
 
