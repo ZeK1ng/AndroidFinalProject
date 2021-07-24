@@ -58,7 +58,7 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:backgroundTint="@color/editTextColor"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:background="@drawable/roundborder"
         android:autofillHints="">
     </EditText>

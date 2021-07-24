@@ -1,27 +1,24 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
-import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
+import ge.dgoginashvili_gkalandadze.finalproject.utils.Utils
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var nameText: EditText
     private lateinit var passwordText: EditText
     private lateinit var workStatus: EditText
     private lateinit var signUpBtn: AppCompatButton
-    private lateinit var regPresenter:RegisterPresenter
+    private lateinit var regPresenter: RegisterPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         signUpBtn = findViewById(R.id.signUpBtn)
         workStatus = findViewById(R.id.workStatusText)
         signUpBtn.setOnClickListener {
+            hideKeyboard()
             handleSignUp()
         }
     }
@@ -49,15 +47,26 @@ class RegisterActivity : AppCompatActivity() {
                 .show();
             return
         }
-        regPresenter.initiateSignUp(name,pass,workStatustxt)
+        regPresenter.initiateSignUp(name, pass, workStatustxt)
 
     }
 
-    fun logSuccess(){
-        Log.d("SuccessRegister","1")
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+              if (view != null) {
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        };
+
     }
-    fun logFail(){
-        Log.d("FailedRegister","0")
+
+    fun logSuccess() {
+        Log.d("SuccessRegister", "1")
+        //TOdo GO To USerPage
+    }
+
+    fun logFail() {
+        Log.d("FailedRegister", "0")
 
     }
 
@@ -78,14 +87,11 @@ class RegisterActivity : AppCompatActivity() {
             workStatus.error = "Please Enter your status"
             return false
         }
-        if(pass.length <=5 ){
+        if (pass.length < 5) {
             passwordText.error = "Password lenght must be 5 or more"
             return false
         }
         return true
     }
 
-    private fun setupListeners() {
-        return
-    }
 }

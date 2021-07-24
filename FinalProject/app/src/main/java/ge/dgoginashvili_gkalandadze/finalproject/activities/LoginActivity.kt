@@ -4,19 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
 import ge.dgoginashvili_gkalandadze.finalproject.R
+import ge.dgoginashvili_gkalandadze.finalproject.presenter.LoginPresenter
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var nameText: EditText
     private lateinit var passwordText: EditText
     private lateinit var signInBtn: AppCompatButton
     private lateinit var signUpBtn: AppCompatButton
-
+    private lateinit var loginPresenter:LoginPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        loginPresenter = LoginPresenter(this)
         setupComponents()
     }
 
@@ -40,17 +43,21 @@ class LoginActivity : AppCompatActivity() {
     private fun handleLogin() {
         val name = nameText.text.trim()
         var pass = passwordText.text.trim()
-        pass = hashPass(pass)
         if(!checkValidInputs(name,pass)){
             return
         }
-        checkCredentiasl()
+        checkCredentials(name.toString(),pass.toString())
     }
 
-    private fun checkCredentiasl() {
-        return
+    private fun checkCredentials(name: String, pass: String) {
+        loginPresenter.checkCredentials(name,pass)
     }
-
+    fun onSuccessfulCredentials(){
+        Log.d("USerAuth","Successfull Auth")
+    }
+    fun onFailedCredentials() {
+        Log.d("USerAuth","Failed Auth")
+    }
     private fun checkValidInputs(name: CharSequence, pass: CharSequence): Boolean {
         if (TextUtils.isEmpty(name)){
             nameText.error = "Please Enter name"
@@ -60,7 +67,10 @@ class LoginActivity : AppCompatActivity() {
             passwordText.error = "Please Enter Password"
             return false
         }
-
+        if(pass.length <5){
+            passwordText.error = "Password length must be at least 5 symbols"
+            return false
+        }
         return true
     }
 
@@ -74,4 +84,6 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
+
+
 }
