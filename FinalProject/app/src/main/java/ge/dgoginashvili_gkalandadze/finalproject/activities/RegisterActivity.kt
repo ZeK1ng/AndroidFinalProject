@@ -59,7 +59,10 @@ class RegisterActivity : AppCompatActivity() {
         };
 
     }
-
+    override fun onDestroy() {
+        regPresenter.detachView()
+        super.onDestroy()
+    }
     fun logSuccess() {
         Log.d("SuccessRegister", "1")
         //TOdo GO To USerPage
@@ -92,6 +95,11 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    fun showUserAlreadyRegisteredError() {
+        nameText.error = "User already Registered with this name. Please try another one"
+        Log.d("FailedRegister", "0")
     }
 
 }

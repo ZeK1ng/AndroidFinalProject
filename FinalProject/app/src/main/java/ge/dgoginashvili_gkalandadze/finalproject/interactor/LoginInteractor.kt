@@ -14,7 +14,6 @@ import kotlin.math.log
 class LoginInteractor(val loginPresenter: LoginPresenter) {
 
     fun checkCredsForUser(name: String, pass: String){
-        var success = false
         val dbase = Firebase.database.getReference("Users")
         dbase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

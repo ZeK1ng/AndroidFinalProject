@@ -60,8 +60,10 @@ class LoginActivity : AppCompatActivity() {
         Log.d("USerAuth","Successfull Auth")
     }
     fun onFailedCredentials() {
-        Log.d("USerAuth","Failed Auth")
+        nameText.error = "Invalid username or password"
+        passwordText.error = "Invalid username or password"
     }
+
     private fun checkValidInputs(name: CharSequence, pass: CharSequence): Boolean {
         if (TextUtils.isEmpty(name)){
             nameText.error = "Please Enter name"
