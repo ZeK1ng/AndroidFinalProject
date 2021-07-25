@@ -12,7 +12,7 @@ class LoginPresenter(var loginActivity:LoginActivity?) {
         loginInteractor.checkCredsForUser(name,pass)
     }
 
-    fun onSuccessfullAuth() {
+    fun onSuccessfulCredentials() {
         loginActivity?.onSuccessfulCredentials()
     }
 

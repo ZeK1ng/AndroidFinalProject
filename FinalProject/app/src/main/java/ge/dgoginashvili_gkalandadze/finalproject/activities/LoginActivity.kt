@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var signInBtn: AppCompatButton
     private lateinit var signUpBtn: AppCompatButton
     private lateinit var loginPresenter:LoginPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -58,6 +59,10 @@ class LoginActivity : AppCompatActivity() {
     }
     fun onSuccessfulCredentials(){
         Log.d("USerAuth","Successfull Auth")
+        //TODO go to user page and auth user with firebase
+        val intent = Intent(this, UserPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
     fun onFailedCredentials() {
         nameText.error = "Invalid username or password"
@@ -79,13 +84,7 @@ class LoginActivity : AppCompatActivity() {
         }
         return true
     }
-
-    private fun hashPass(pass: CharSequence): CharSequence {
-        //TODO
-        return pass
-    }
-
-    //TODO load new SingUp Activity
+    
     private fun loadSignUpActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)

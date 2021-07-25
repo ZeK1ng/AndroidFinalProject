@@ -21,7 +21,7 @@ class RegisterPresenter(var registerActivity: RegisterActivity?) {
         registerActivity?.showUserAlreadyRegisteredError()
     }
     fun onSuccessfulRegister() {
-        registerActivity?.logSuccess()
+        registerActivity?.registerSuccess()
     }
 
     fun onFailedRegister() {

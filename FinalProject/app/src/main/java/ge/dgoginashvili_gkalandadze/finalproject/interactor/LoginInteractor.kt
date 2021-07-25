@@ -22,7 +22,7 @@ class LoginInteractor(val loginPresenter: LoginPresenter) {
                         val userHashedPass = child.child("pass").value
                         Log.d("pass", userHashedPass.toString())
                         if (Utils.checkPassByHash(pass, userHashedPass.toString())) {
-                            loginPresenter.onSuccessfullAuth()
+                            loginPresenter.onSuccessfulCredentials()
                         }else{
                             loginPresenter.onFailedCredentials()
                         }

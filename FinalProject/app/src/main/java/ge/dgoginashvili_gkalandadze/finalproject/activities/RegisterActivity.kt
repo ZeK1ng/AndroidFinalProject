@@ -1,6 +1,6 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
-import ge.dgoginashvili_gkalandadze.finalproject.utils.Utils
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var nameText: EditText
@@ -43,7 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         var pass = passwordText.text.trim()
         val workStatustxt = workStatus.text.trim()
         if (!checkValidInputs(name, pass, workStatustxt)) {
-            Toast.makeText(getApplicationContext(), "Please enter valid values", Toast.LENGTH_SHORT)
+            Toast.makeText(applicationContext, "Please enter valid values", Toast.LENGTH_SHORT)
                 .show();
             return
         }
@@ -63,14 +62,21 @@ class RegisterActivity : AppCompatActivity() {
         regPresenter.detachView()
         super.onDestroy()
     }
-    fun logSuccess() {
-        Log.d("SuccessRegister", "1")
-        //TOdo GO To USerPage
+
+
+    fun registerSuccess() {
+        Log.d("SuccessRegister", "Registered succesfull")
+        //TOdo GO To USerPage . firebase auth user
+        val intent = Intent(this, UserPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     fun logFail() {
-        Log.d("FailedRegister", "0")
+        Log.d("RegisterFail", "Failed to register")
 
+        Toast.makeText(applicationContext, "Something went wrong. Please try again", Toast.LENGTH_SHORT)
+            .show();
     }
 
     private fun checkValidInputs(
@@ -99,7 +105,7 @@ class RegisterActivity : AppCompatActivity() {
 
     fun showUserAlreadyRegisteredError() {
         nameText.error = "User already Registered with this name. Please try another one"
-        Log.d("FailedRegister", "0")
+        Log.d("FailedRegister", "Failed register")
     }
 
 }
