@@ -13,7 +13,7 @@ import kotlin.math.log
 
 class LoginInteractor(val loginPresenter: LoginPresenter) {
 
-    fun checkCredsForUser(name: String, pass: String): String {
+    fun checkCredsForUser(name: String, pass: String){
         var success = false
         val dbase = Firebase.database.getReference("Users")
         dbase.addValueEventListener(object : ValueEventListener {
@@ -22,9 +22,11 @@ class LoginInteractor(val loginPresenter: LoginPresenter) {
                     if (child.child("name").value == name) {
                         val userHashedPass = child.child("pass").value
                         Log.d("pass", userHashedPass.toString())
-//                        if (Utils.checkPassByHash(pass, userHashedPass.toString())) {
-//                            success = true
-//                        }
+                        if (Utils.checkPassByHash(pass, userHashedPass.toString())) {
+                            loginPresenter.onSuccessfullAuth()
+                        }else{
+                            loginPresenter.onFailedCredentials()
+                        }
                     }
                 }
             }
@@ -32,13 +34,6 @@ class LoginInteractor(val loginPresenter: LoginPresenter) {
             override fun onCancelled(error: DatabaseError) {
                 return
             }
-
         })
-
-        if (success) {
-            return StatusCodes.CREDENTIALS_SUCCESS
-        }
-        return StatusCodes.CREDENTIALS_FAILED
     }
-
 }

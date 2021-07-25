@@ -48,6 +48,10 @@ class LoginActivity : AppCompatActivity() {
         }
         checkCredentials(name.toString(),pass.toString())
     }
+    override fun onDestroy() {
+        loginPresenter.detachView()
+        super.onDestroy()
+    }
 
     private fun checkCredentials(name: String, pass: String) {
         loginPresenter.checkCredentials(name,pass)
