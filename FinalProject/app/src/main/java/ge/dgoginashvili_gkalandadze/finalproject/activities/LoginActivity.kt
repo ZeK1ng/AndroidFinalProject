@@ -7,6 +7,9 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.EditText
 import androidx.appcompat.widget.AppCompatButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.LoginPresenter
 
@@ -16,6 +19,16 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var signInBtn: AppCompatButton
     private lateinit var signUpBtn: AppCompatButton
     private lateinit var loginPresenter:LoginPresenter
+    private lateinit var firebaseAuth: FirebaseAuth
+
+
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth = Firebase.auth
+        if(firebaseAuth.currentUser != null){
+            loadUserpageActivity()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,9 +73,7 @@ class LoginActivity : AppCompatActivity() {
     fun onSuccessfulCredentials(){
         Log.d("USerAuth","Successfull Auth")
         //TODO go to user page and auth user with firebase
-        val intent = Intent(this, UserPageActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        loadUserpageActivity()
     }
     fun onFailedCredentials() {
         nameText.error = "Invalid username or password"
@@ -89,6 +100,10 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
-
+    private fun loadUserpageActivity() {
+        val intent = Intent(this, UserPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
 
 }

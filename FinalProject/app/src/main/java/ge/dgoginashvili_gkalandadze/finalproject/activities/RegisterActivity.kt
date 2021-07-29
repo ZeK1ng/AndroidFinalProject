@@ -9,6 +9,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
 
@@ -18,7 +21,15 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var workStatus: EditText
     private lateinit var signUpBtn: AppCompatButton
     private lateinit var regPresenter: RegisterPresenter
+    private lateinit var firebaseAuth: FirebaseAuth
 
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth = Firebase.auth
+        if(firebaseAuth.currentUser != null){
+            loadUserpageActivity()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -67,9 +78,7 @@ class RegisterActivity : AppCompatActivity() {
     fun registerSuccess() {
         Log.d("SuccessRegister", "Registered succesfull")
         //TOdo GO To USerPage . firebase auth user
-        val intent = Intent(this, UserPageActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        loadUserpageActivity()
     }
 
     fun logFail() {
@@ -106,6 +115,11 @@ class RegisterActivity : AppCompatActivity() {
     fun showUserAlreadyRegisteredError() {
         nameText.error = "User already Registered with this name. Please try another one"
         Log.d("FailedRegister", "Failed register")
+    }
+    fun loadUserpageActivity(){
+        val intent = Intent(this, UserPageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
 }
