@@ -13,15 +13,15 @@ class RegisterPresenter(var registerActivity: RegisterActivity?) {
 
     }
     fun registerUser(name:String,pass:String,workStatustxt:String){
-        val hashedPass = Utils.hashPwd(pass.toString())
+        val hashedPass = Utils.hashPwd(pass)
         val newUser = UserData(name, hashedPass, workStatustxt)
         regInteractor.saveUserToDB(newUser)
     }
     fun userAlreadyRegistered(){
         registerActivity?.showUserAlreadyRegisteredError()
     }
-    fun onSuccessfulRegister() {
-        registerActivity?.registerSuccess()
+    fun onSuccessfulRegister(newUser: UserData) {
+        registerActivity?.registerSuccess(newUser)
     }
 
     fun onFailedRegister() {
@@ -30,5 +30,16 @@ class RegisterPresenter(var registerActivity: RegisterActivity?) {
 
     fun detachView() {
         registerActivity = null
+    }
+
+    fun authUser(newUser: UserData) {
+        regInteractor.authUser(newUser.name,newUser.pass)
+    }
+    fun authSuccess(){
+        registerActivity?.authSuccess()
+    }
+
+    fun autFailed() {
+        registerActivity?.authFailed()
     }
 }

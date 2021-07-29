@@ -70,7 +70,7 @@
         android:textColor="@color/white"
         android:id="@+id/signUpBtn"
         android:backgroundTint="@color/signInButton"
-        android:text="@string/signIn" />
+        android:text="@string/sign_up" />
 
 
 </LinearLayout>

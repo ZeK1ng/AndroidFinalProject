@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
+import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
 
 class RegisterActivity : AppCompatActivity() {
@@ -75,9 +76,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    fun registerSuccess() {
+    fun registerSuccess(newUser: UserData) {
         Log.d("SuccessRegister", "Registered succesfull")
         //TOdo GO To USerPage . firebase auth user
+        regPresenter.authUser(newUser)
+//        authSuccess()
+    }
+
+    fun authSuccess(){
         loadUserpageActivity()
     }
 
@@ -120,6 +126,11 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, UserPageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
+    }
+
+    fun authFailed() {
+        Toast.makeText(baseContext, "Authentication failed.",
+            Toast.LENGTH_SHORT).show()
     }
 
 }
