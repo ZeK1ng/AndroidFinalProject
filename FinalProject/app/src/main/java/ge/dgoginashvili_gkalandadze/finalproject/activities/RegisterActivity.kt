@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
-import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
 
 class RegisterActivity : AppCompatActivity() {
@@ -81,8 +80,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    fun logFail() {
-        Log.d("RegisterFail", "Failed to register")
+    fun saveFail() {
+        Log.e("UserSaveFail", "Failed to save user")
         Toast.makeText(applicationContext, "Something went wrong. Please try again", Toast.LENGTH_SHORT)
             .show();
         nameText.error = "An Error Occured. Please try again"
@@ -119,11 +118,11 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun registerFailed() {
+    fun authFail() {
         Toast.makeText(baseContext, "Registration failed.",
             Toast.LENGTH_SHORT).show()
         nameText.error = "User already Registered with this name. Please try another one"
-        Log.d("Register Error","Failed Registration")
+        Log.e("Register Error","Failed Registration")
     }
 
 }

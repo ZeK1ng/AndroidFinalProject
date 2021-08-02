@@ -2,7 +2,6 @@ package ge.dgoginashvili_gkalandadze.finalproject.presenter
 
 import ge.dgoginashvili_gkalandadze.finalproject.activities.LoginActivity
 import ge.dgoginashvili_gkalandadze.finalproject.interactor.LoginInteractor
-import ge.dgoginashvili_gkalandadze.finalproject.utils.StatusCodes
 
 class LoginPresenter(var loginActivity:LoginActivity?) {
 

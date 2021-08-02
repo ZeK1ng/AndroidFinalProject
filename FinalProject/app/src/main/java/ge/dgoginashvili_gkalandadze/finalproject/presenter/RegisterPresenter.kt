@@ -4,18 +4,19 @@ import ge.dgoginashvili_gkalandadze.finalproject.activities.RegisterActivity
 import ge.dgoginashvili_gkalandadze.finalproject.interactor.RegisterInteractor
 
 class RegisterPresenter(var registerActivity: RegisterActivity?) {
-    private val regInteractor = RegisterInteractor(this)
+
+    private val registerInteractor = RegisterInteractor(this)
 
     fun initiateSignUp(name: CharSequence, pass: CharSequence, workStatustxt: CharSequence) {
-        regInteractor.registerUser(name.toString(),pass.toString(),workStatustxt.toString())
+        registerInteractor.registerUser(name.toString(),pass.toString(),workStatustxt.toString())
 
     }
     fun onSuccessfulRegister() {
         registerActivity?.registerSuccess()
     }
 
-    fun onFailedRegister() {
-        registerActivity?.logFail()
+    fun onFailedSave() {
+        registerActivity?.saveFail()
     }
 
     fun detachView() {
@@ -23,7 +24,7 @@ class RegisterPresenter(var registerActivity: RegisterActivity?) {
     }
 
 
-    fun registerFailed() {
-        registerActivity?.registerFailed()
+    fun onAuthFailed() {
+        registerActivity?.authFail()
     }
 }

@@ -1,9 +1,7 @@
 package ge.dgoginashvili_gkalandadze.finalproject.interactor
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
-import com.google.firebase.installations.Utils
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
@@ -25,10 +23,10 @@ class RegisterInteractor(val regPresenter: RegisterPresenter) {
                     dbase.child(newUser.name).setValue(newUser).addOnSuccessListener {
                         regPresenter.onSuccessfulRegister()
                     }.addOnFailureListener {
-                        regPresenter.onFailedRegister()
+                        regPresenter.onFailedSave()
                     }
                 } else {
-                    regPresenter.registerFailed()
+                    regPresenter.onAuthFailed()
                 }
             }
     }

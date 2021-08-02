@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordText: EditText
     private lateinit var signInBtn: AppCompatButton
     private lateinit var signUpBtn: AppCompatButton
-    private lateinit var loginPresenter:LoginPresenter
+    private lateinit var loginPresenter: LoginPresenter
     private lateinit var firebaseAuth: FirebaseAuth
 
 
@@ -56,50 +56,53 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleLogin() {
         val name = nameText.text.trim()
-        var pass = passwordText.text.trim()
-        if(!checkValidInputs(name,pass)){
+        val pass = passwordText.text.trim()
+        if (!checkValidInputs(name, pass)) {
             return
         }
-        checkCredentials(name.toString(),pass.toString())
+        checkCredentials(name.toString(), pass.toString())
     }
+
     override fun onDestroy() {
         loginPresenter.detachView()
         super.onDestroy()
     }
 
     private fun checkCredentials(name: String, pass: String) {
-        loginPresenter.checkCredentials(name,pass)
+        loginPresenter.checkCredentials(name, pass)
     }
-    fun onSuccessfulCredentials(){
-        Log.d("USerAuth","Successfull Auth")
-        //TODO go to user page and auth user with firebase
+
+    fun onSuccessfulCredentials() {
+        Log.d("USerAuth", "Successfull Auth")
         loadUserpageActivity()
     }
+
     fun onFailedCredentials() {
         nameText.error = "Invalid username or password"
         passwordText.error = "Invalid username or password"
     }
 
     private fun checkValidInputs(name: CharSequence, pass: CharSequence): Boolean {
-        if (TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             nameText.error = "Please Enter name"
             return false
         }
-        if (TextUtils.isEmpty(pass)){
+        if (TextUtils.isEmpty(pass)) {
             passwordText.error = "Please Enter Password"
             return false
         }
-        if(pass.length <5){
+        if (pass.length < 5) {
             passwordText.error = "Password length must be at least 5 symbols"
             return false
         }
         return true
     }
-    
+
     private fun loadSignUpActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
+
     private fun loadUserpageActivity() {
         val intent = Intent(this, UserPageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
