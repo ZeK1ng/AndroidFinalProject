@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.profilePageActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    tools:context=".activities.LoginActivity">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/avatar_image_placeholder"
+        tools:layout_editor_absoluteY="162dp"
+        android:contentDescription="@string/imageContentDesc"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/profPageName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:background="@drawable/roundborder"
+        android:backgroundTint="@color/editTextColor"
+        android:text=""
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:id="@+id/profPageStatus"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:background="@drawable/roundborder"
+        android:backgroundTint="@color/editTextColor"
+        android:text=""
+        android:gravity="center"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/roundborder"
+        android:textColor="@color/white"
+        android:id="@+id/signUpBtn"
+        android:backgroundTint="@color/signInButton"
+        android:text="@string/sign_up" />
+
+
+</LinearLayout>

@@ -104,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loadUserpageActivity() {
-        val intent = Intent(this, UserPageActivity::class.java)
+        val intent = Intent(this, ProfilePageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

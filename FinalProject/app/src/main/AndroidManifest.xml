@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FInalProject">
         <activity android:name=".activities.UserPageActivity"></activity>
-        <activity android:name=".activities.profilePageActivity" />
+        <activity android:name=".activities.ProfilePageActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
