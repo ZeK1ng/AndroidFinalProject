@@ -25,9 +25,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         firebaseAuth = Firebase.auth
-        if(firebaseAuth.currentUser != null){
-            loadUserpageActivity()
-        }
+//        if(firebaseAuth.currentUser != null){
+//            loadUserpageActivity()
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -27,9 +27,9 @@ class RegisterActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         firebaseAuth = Firebase.auth
-        if(firebaseAuth.currentUser != null){
-            loadUserpageActivity()
-        }
+//        if(firebaseAuth.currentUser != null){
+//            loadUserpageActivity()
+//        }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,22 +76,17 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    fun registerSuccess(newUser: UserData) {
-        Log.d("SuccessRegister", "Registered succesfull")
-        //TOdo GO To USerPage . firebase auth user
-        regPresenter.authUser(newUser)
-//        authSuccess()
-    }
-
-    fun authSuccess(){
+    fun registerSuccess() {
         loadUserpageActivity()
     }
 
+
     fun logFail() {
         Log.d("RegisterFail", "Failed to register")
-
         Toast.makeText(applicationContext, "Something went wrong. Please try again", Toast.LENGTH_SHORT)
             .show();
+        nameText.error = "An Error Occured. Please try again"
+
     }
 
     private fun checkValidInputs(
@@ -118,19 +113,17 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    fun showUserAlreadyRegisteredError() {
-        nameText.error = "User already Registered with this name. Please try another one"
-        Log.d("FailedRegister", "Failed register")
-    }
     fun loadUserpageActivity(){
         val intent = Intent(this, UserPageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
-    fun authFailed() {
-        Toast.makeText(baseContext, "Authentication failed.",
+    fun registerFailed() {
+        Toast.makeText(baseContext, "Registration failed.",
             Toast.LENGTH_SHORT).show()
+        nameText.error = "User already Registered with this name. Please try another one"
+        Log.d("Register Error","Failed Registration")
     }
 
 }

@@ -7,9 +7,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.LoginPresenter
-import ge.dgoginashvili_gkalandadze.finalproject.utils.StatusCodes
-import ge.dgoginashvili_gkalandadze.finalproject.utils.Utils
-import kotlin.math.log
+import ge.dgoginashvili_gkalandadze.finalproject.utils.UtilsHelper
 
 class LoginInteractor(val loginPresenter: LoginPresenter) {
 
@@ -21,7 +19,7 @@ class LoginInteractor(val loginPresenter: LoginPresenter) {
                     if (child.child("name").value == name) {
                         val userHashedPass = child.child("pass").value
                         Log.d("pass", userHashedPass.toString())
-                        if (Utils.checkPassByHash(pass, userHashedPass.toString())) {
+                        if (UtilsHelper.checkPassByHash(pass, userHashedPass.toString())) {
                             loginPresenter.onSuccessfulCredentials()
                         }else{
                             loginPresenter.onFailedCredentials()
