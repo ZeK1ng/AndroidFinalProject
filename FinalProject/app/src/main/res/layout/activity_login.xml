@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:paddingBottom="20dp"
     tools:context=".activities.LoginActivity">
-    <Space
+        <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -23,35 +23,34 @@
         android:contentDescription="@string/imageContentDesc"
         />
     <EditText
+        android:id="@+id/nicknameText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:hint="@string/enterNicknameHint"
-        android:id="@+id/nicknameText"
         android:layout_marginTop="20dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:backgroundTint="@color/editTextColor"
-        android:inputType="text"
         android:background="@drawable/roundborder"
-        android:autofillHints="">
-    </EditText>
+        android:backgroundTint="@color/editTextColor"
+        android:hint="@string/enterNicknameHint"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"></EditText>
+
     <EditText
+        android:id="@+id/passwordText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="@string/enterPasswordHint"
-        android:id="@+id/passwordText"
-        android:paddingStart="10dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:backgroundTint="@color/editTextColor"
-        android:inputType="textPassword"
         android:background="@drawable/roundborder"
-        android:autofillHints="">
-    </EditText>
+        android:backgroundTint="@color/editTextColor"
+        android:hint="@string/enterPasswordHint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"></EditText>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
