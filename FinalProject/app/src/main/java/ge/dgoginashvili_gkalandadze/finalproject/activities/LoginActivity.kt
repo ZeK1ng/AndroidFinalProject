@@ -22,13 +22,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
 
 
-    override fun onStart() {
-        super.onStart()
-        firebaseAuth = Firebase.auth
+//    override fun onStart() {
+//        super.onStart()
+//        firebaseAuth = Firebase.auth
 //        if(firebaseAuth.currentUser != null){
 //            loadUserpageActivity()
 //        }
-    }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
