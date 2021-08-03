@@ -26,14 +26,14 @@
         android:autofillHints=""
         android:background="@drawable/roundborder"
         android:backgroundTint="@color/editTextColor"
-        android:text=""
+        android:textSize="20sp"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingBottom="10dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/profPageStatus"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -51,12 +51,20 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/roundborder"
         android:textColor="@color/white"
-        android:id="@+id/signUpBtn"
+        android:id="@+id/updateButton"
         android:backgroundTint="@color/signInButton"
-        android:text="@string/sign_up" />
+        android:text="@string/UPDATE" />
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:layout_marginTop="4dp"
+        android:id="@+id/logoutBtn"
+        android:background="@drawable/roundbordersolid"
+        >
+    </androidx.appcompat.widget.AppCompatButton>
 </LinearLayout>

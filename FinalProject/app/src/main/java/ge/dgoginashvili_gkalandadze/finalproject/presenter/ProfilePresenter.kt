@@ -8,7 +8,12 @@ class ProfilePresenter(var profileActivity: ProfilePageActivity?) {
     private val profileInteractor = ProfileInteractor(this)
 
     fun loadProfile() {
-        TODO("Not yet implemented")
+        profileInteractor.getUserData()
+    }
+
+    fun loadProfileData(userName: String?, status: String) {
+        profileActivity?.nameView?.text  = userName
+        profileActivity?.statusView?.text = status
     }
 
 }
