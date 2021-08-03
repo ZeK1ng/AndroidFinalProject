@@ -36,7 +36,7 @@
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"/>
 
     <EditText
         android:id="@+id/passwordText"
@@ -51,15 +51,17 @@
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundborder"
         android:backgroundTint="@color/signInButton"
-        android:text="@string/signIn" />
+        android:text="@string/signIn"
+        android:textColor="@color/white" />
 
     <Space
         android:layout_width="match_parent"
@@ -72,9 +74,11 @@
         android:text="@string/not_registered"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@drawable/roundbordersolid"/>
+        android:background="@drawable/roundbordersolid"
+        android:text="@string/sign_up"/>
 
 </LinearLayout>
