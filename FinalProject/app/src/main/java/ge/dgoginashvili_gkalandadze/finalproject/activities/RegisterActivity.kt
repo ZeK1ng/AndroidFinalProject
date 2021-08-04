@@ -30,6 +30,7 @@ class RegisterActivity : AppCompatActivity() {
 //            loadUserpageActivity()
 //        }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -64,11 +65,12 @@ class RegisterActivity : AppCompatActivity() {
     private fun hideKeyboard() {
         val view = this.currentFocus
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-              if (view != null) {
+        if (view != null) {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         };
 
     }
+
     override fun onDestroy() {
         regPresenter.detachView()
         super.onDestroy()
@@ -82,7 +84,11 @@ class RegisterActivity : AppCompatActivity() {
 
     fun saveFail() {
         Log.e("UserSaveFail", "Failed to save user")
-        Toast.makeText(applicationContext, "Something went wrong. Please try again", Toast.LENGTH_SHORT)
+        Toast.makeText(
+            applicationContext,
+            "Something went wrong. Please try again",
+            Toast.LENGTH_SHORT
+        )
             .show();
         nameText.error = "An Error Occured. Please try again"
 
@@ -112,17 +118,19 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    fun loadUserpageActivity(){
+    fun loadUserpageActivity() {
         val intent = Intent(this, ProfilePageActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
     fun authFail() {
-        Toast.makeText(baseContext, "Registration failed.",
-            Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            baseContext, "Registration failed.",
+            Toast.LENGTH_SHORT
+        ).show()
         nameText.error = "User already Registered with this name. Please try another one"
-        Log.e("Register Error","Failed Registration")
+        Log.e("Register Error", "Failed Registration")
     }
 
 }
