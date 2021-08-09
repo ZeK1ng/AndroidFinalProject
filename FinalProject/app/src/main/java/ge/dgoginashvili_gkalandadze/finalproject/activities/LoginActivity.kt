@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginPresenter: LoginPresenter
     private lateinit var firebaseAuth: FirebaseAuth
 
-
 //    override fun onStart() {
 //        super.onStart()
 //        firebaseAuth = Firebase.auth
@@ -79,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun onSuccessfulCredentials() {
-        Log.d("USerAuth", "Successfull Auth")
 //        loadUserpageActivity()
         loadMainActivity()
     }

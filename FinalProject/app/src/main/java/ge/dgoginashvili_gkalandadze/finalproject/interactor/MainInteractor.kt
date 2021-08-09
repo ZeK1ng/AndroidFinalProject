@@ -28,27 +28,23 @@ class MainInteractor(val mainPresenter: MainPresenter) {
         dbase.child(userName!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val arr = snapshot.value as ArrayList<String>
-                var resArr: Array<MessageContainer?> = arrayOfNulls(arr.size)
+                var resArr: Array<Pair<String, MessageContainer>?> = arrayOfNulls(arr.size)
                 val latch = CountDownLatch(arr.size)
                 GlobalScope.launch {
                     for ((ind, str) in arr.withIndex()) {
-
                         dbaseM.child(str).get().addOnSuccessListener {
-                            val hash: HashMap<String, Any> = it.value as HashMap<String, Any>
-                            val chat = hash["chat"] as List<Message>
-                            resArr[ind] = MessageContainer(
-                                chat,
-                                hash["talk1"] as String,
-                                hash["talk2"] as String
-                            )
+                            val cont = it.getValue(MessageContainer::class.java)
+                            if(cont != null) {
+                                resArr[ind] = Pair(str, cont)
+                            }
                             latch.countDown()
                         }.addOnFailureListener {
                             latch.countDown()
                         }
 
                     }
-                    latch.await(2, TimeUnit.SECONDS)
-                    mainPresenter.chatFetched(resArr.filterNotNull() as ArrayList<MessageContainer>)
+                    latch.await(5, TimeUnit.SECONDS)
+                    mainPresenter.chatFetched(resArr.filterNotNull() as ArrayList<Pair<String, MessageContainer>>)
                 }
 
             }

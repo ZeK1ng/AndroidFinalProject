@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="@+id/bottom_menu"
         app:layout_constraintStart_toStartOf="@+id/bottom_menu"
         android:layout_marginBottom="30dp"
-        android:translationZ="2dp"
-        android:backgroundTint="@color/purple_500"
+        android:translationZ="3dp"
+        android:backgroundTint="@color/button_color"
         app:srcCompat="@drawable/ic_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

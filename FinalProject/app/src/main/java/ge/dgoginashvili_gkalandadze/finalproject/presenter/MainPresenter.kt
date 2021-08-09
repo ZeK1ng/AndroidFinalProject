@@ -12,7 +12,7 @@ class MainPresenter(var mainActivity: MainActivity?) {
         mainInteractor?.fetchChats()
     }
 
-    fun chatFetched(msg: ArrayList<MessageContainer>) {
+    fun chatFetched(msg: ArrayList<Pair<String, MessageContainer>>) {
         mainActivity!!.updateChats(msg)
     }
 

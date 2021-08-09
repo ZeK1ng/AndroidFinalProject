@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         mainPresenter = MainPresenter(this)
     }
 
-    fun updateChats(personArray: ArrayList<MessageContainer>) {
+    fun updateChats(personArray: ArrayList<Pair<String, MessageContainer>>) {
         CoroutineScope(Dispatchers.Main).async {
             (recycler.adapter as MainPageAdapter).setHistory(personArray)
         }

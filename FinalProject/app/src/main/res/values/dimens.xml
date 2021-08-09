@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="appBarHeight">150dp</dimen>
+    <dimen name="searchWidth">0dp</dimen>
+    <dimen name="searchHeight">40dp</dimen>
+</resources>

@@ -16,7 +16,6 @@ class ProfilePresenter(var profileActivity: ProfilePageActivity?) {
     }
 
     fun loadProfileData(userName: String?, status: String) {
-        Log.d("RRRR", "VAH KI DA")
         profileActivity?.nameView?.text  = userName
         profileActivity?.statusView?.text = status
     }
