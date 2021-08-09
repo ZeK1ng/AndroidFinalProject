@@ -9,4 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="editTextColor">#f3f6ff</color>
     <color name="signInButton">#0A9EE3</color>
+    <color name="message_box_background">#5479F1</color>
+    <color name="other_message_box_background">#F4F6FF</color>
+    <color name="message_text_color">#FFFFFF</color>
+    <color name="other_message_text_color">#566286</color>
+    <color name="button_color">#5479F1</color>
 </resources>

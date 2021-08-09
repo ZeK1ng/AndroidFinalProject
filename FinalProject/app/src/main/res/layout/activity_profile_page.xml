@@ -14,11 +14,11 @@
         android:layout_weight="1"
         />
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/avatar"
         android:layout_width="144dp"
         android:layout_height="144dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/avatar_image_placeholder"
+        app:srcCompat="@drawable/unisex_avatar"
         tools:layout_editor_absoluteY="162dp"
         android:contentDescription="@string/imageContentDesc"
         />
@@ -75,4 +75,14 @@
         android:background="@drawable/roundbordersolid"
         >
     </androidx.appcompat.widget.AppCompatButton>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:itemIconTint="@android:color/darker_gray"
+        app:itemTextColor="@android:color/darker_gray"
+        app:menu="@menu/bottom_menu" />
 </LinearLayout>

@@ -29,7 +29,9 @@
         android:paddingTop="10dp"
         android:backgroundTint="@color/editTextColor"
         android:inputType="text"
-        android:background="@drawable/roundborder">
+        android:background="@drawable/roundborder"
+        android:textAlignment="center"
+        >
     </EditText>
     <EditText
         android:layout_width="200dp"
@@ -43,7 +45,9 @@
         android:paddingTop="10dp"
         android:backgroundTint="@color/editTextColor"
         android:inputType="textPassword"
-        android:background="@drawable/roundborder">
+        android:background="@drawable/roundborder"
+        android:textAlignment="center"
+        >
     </EditText>
     <EditText
         android:layout_width="200dp"
@@ -57,16 +61,18 @@
         android:paddingTop="10dp"
         android:backgroundTint="@color/editTextColor"
         android:inputType="text"
-        android:background="@drawable/roundborder">
+        android:background="@drawable/roundborder"
+        android:textAlignment="center"
+        >
     </EditText>
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/roundborder"
+        android:background="@drawable/roundbordersolid"
         android:textColor="@color/white"
         android:id="@+id/signUpBtn"
-        android:backgroundTint="@color/signInButton"
+        android:backgroundTint="@color/button_color"
         android:text="@string/sign_up" />
 
 

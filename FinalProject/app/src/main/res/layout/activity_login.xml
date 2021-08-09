@@ -25,7 +25,7 @@
 
     <EditText
         android:id="@+id/nicknameText"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundborder"
@@ -33,14 +33,16 @@
         android:hint="@string/enterNicknameHint"
         android:inputType="text"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingStart="40dp"
         android:paddingTop="10dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="10dp"/>
+        android:paddingEnd="40dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        />
 
     <EditText
         android:id="@+id/passwordText"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundborder"
@@ -48,18 +50,20 @@
         android:hint="@string/enterPasswordHint"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:paddingStart="10dp"
+        android:paddingStart="40dp"
         android:paddingTop="10dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="10dp"/>
+        android:paddingEnd="40dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signinButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/roundborder"
-        android:backgroundTint="@color/signInButton"
+        android:background="@drawable/roundbordersolid"
+        android:backgroundTint="@color/button_color"
         android:text="@string/signIn"
         android:textColor="@color/white" />
 
@@ -76,9 +80,9 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signupButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/roundbordersolid"
-        android:text="@string/sign_up"/>
+        android:text="@string/sign_up" />
 
 </LinearLayout>

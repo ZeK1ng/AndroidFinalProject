@@ -20,7 +20,7 @@ class RegisterInteractor(val regPresenter: RegisterPresenter) {
                 if (it.isSuccessful) {
                     val dbase = Firebase.database.getReference("Users")
                     val newUser = UserData(name, workStatus)
-                    dbase.child(newUser.name).setValue(newUser).addOnSuccessListener {
+                    dbase.child(newUser.username).setValue(newUser).addOnSuccessListener {
                         regPresenter.onSuccessfulRegister()
                     }.addOnFailureListener {
                         regPresenter.onFailedSave()

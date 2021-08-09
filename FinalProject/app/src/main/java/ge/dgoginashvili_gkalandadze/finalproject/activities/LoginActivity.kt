@@ -63,6 +63,12 @@ class LoginActivity : AppCompatActivity() {
         checkCredentials(name.toString(), pass.toString())
     }
 
+    private fun handleSignOut() {
+//        AuthUI.getInstance().signOut()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
+    }
+
     override fun onDestroy() {
         loginPresenter.detachView()
         super.onDestroy()
@@ -74,7 +80,8 @@ class LoginActivity : AppCompatActivity() {
 
     fun onSuccessfulCredentials() {
         Log.d("USerAuth", "Successfull Auth")
-        loadUserpageActivity()
+//        loadUserpageActivity()
+        loadMainActivity()
     }
 
     fun onFailedCredentials() {
@@ -105,6 +112,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loadUserpageActivity() {
         val intent = Intent(this, ProfilePageActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
+    private fun loadMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
