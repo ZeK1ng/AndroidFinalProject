@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clientapp.models.MessageContainer
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.MainPageAdapter
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainPresenter: MainPresenter
     private lateinit var recycler: RecyclerView
     private lateinit var bottomMenu: BottomNavigationView
+    private lateinit var plbtn:FloatingActionButton
     private val menuItemListener =
         NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
 
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_allchat)
         setupPresenter()
         bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
+        plbtn = findViewById(R.id.add_person_fab)
+        plbtn.bringToFront()
         initMenuListener()
         recycler = findViewById(R.id.messages_recyclerview)
         recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

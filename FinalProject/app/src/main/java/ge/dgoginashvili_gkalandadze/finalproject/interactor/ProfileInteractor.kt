@@ -80,7 +80,7 @@ class ProfileInteractor(val profilePresenter: ProfilePresenter) {
             val imagesRef = storageRef.child("${userName}.jpg")
             val uploadTask = imagesRef.putBytes(data)
             uploadTask.addOnFailureListener {
-                // Handle unsuccessful uploads
+               Log.e("Image Upload Status","Failed")
             }.addOnSuccessListener { taskSnapshot ->
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 //            val downloadUrl: Uri = taskSnapshot.getDownloadUrl()
