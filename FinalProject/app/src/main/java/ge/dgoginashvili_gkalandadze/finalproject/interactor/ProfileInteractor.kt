@@ -18,15 +18,6 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.OnFailureListener
 
 
-
-
-
-
-
-
-
-
-
 class ProfileInteractor(val profilePresenter: ProfilePresenter) {
     private lateinit var firebaseAuth: FirebaseAuth
     private val storage = FirebaseStorage.getInstance()
@@ -44,10 +35,11 @@ class ProfileInteractor(val profilePresenter: ProfilePresenter) {
                     if (child.child("username").value == userName) {
                         val status = child.child("status").value.toString()
                         Log.d("RRRR", "HMMMM")
-                        profilePresenter.loadProfileData(userName,status)
+                        profilePresenter.loadProfileData(userName, status)
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 profilePresenter.dbError(error)
             }
@@ -73,13 +65,14 @@ class ProfileInteractor(val profilePresenter: ProfilePresenter) {
         val newUser = UserData(userName!!, newStatus.toString())
         val dbase = Firebase.database.getReference("Users")
         dbase.child(newUser.username).setValue(newUser).addOnSuccessListener {
-            profilePresenter.updateSuccessful()
+            updateAvatar(avatar,userName)
         }.addOnFailureListener {
             profilePresenter.updateFailed()
         }
 
-        //Update Avatar
-        if(avatar != null) {
+    }
+    private fun updateAvatar(avatar: Bitmap?,userName:String){
+        if (avatar != null) {
             val baos = ByteArrayOutputStream()
             avatar.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             val data: ByteArray = baos.toByteArray()
@@ -90,8 +83,9 @@ class ProfileInteractor(val profilePresenter: ProfilePresenter) {
                 // Handle unsuccessful uploads
             }.addOnSuccessListener { taskSnapshot ->
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-//            val downloadUrl: Uri = taskSnapshot.getDownloadUrl()
+                //            val downloadUrl: Uri = taskSnapshot.getDownloadUrl()
                 // Do what you want
+                profilePresenter.updateSuccessful()
             }
         }
     }

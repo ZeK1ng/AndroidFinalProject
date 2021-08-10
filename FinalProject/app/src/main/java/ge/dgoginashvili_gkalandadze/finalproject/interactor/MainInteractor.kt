@@ -27,27 +27,29 @@ class MainInteractor(val mainPresenter: MainPresenter) {
 
         dbase.child(userName!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val arr = snapshot.value as ArrayList<String>
-                var resArr: Array<Pair<String, MessageContainer>?> = arrayOfNulls(arr.size)
-                val latch = CountDownLatch(arr.size)
-                GlobalScope.launch {
-                    for ((ind, str) in arr.withIndex()) {
-                        dbaseM.child(str).get().addOnSuccessListener {
-                            val cont = it.getValue(MessageContainer::class.java)
-                            if(cont != null) {
-                                resArr[ind] = Pair(str, cont)
+                if (snapshot.value != null) {
+                    val arr = snapshot.value as ArrayList<String>
+                    var resArr: Array<Pair<String, MessageContainer>?> = arrayOfNulls(arr.size)
+                    val latch = CountDownLatch(arr.size)
+                    GlobalScope.launch {
+                        for ((ind, str) in arr.withIndex()) {
+                            dbaseM.child(str).get().addOnSuccessListener {
+                                val cont = it.getValue(MessageContainer::class.java)
+                                if (cont != null) {
+                                    resArr[ind] = Pair(str, cont)
+                                }
+                                latch.countDown()
+                            }.addOnFailureListener {
+                                latch.countDown()
                             }
-                            latch.countDown()
-                        }.addOnFailureListener {
-                            latch.countDown()
+
                         }
-
+                        latch.await(5, TimeUnit.SECONDS)
+                        mainPresenter.chatFetched(resArr.filterNotNull() as ArrayList<Pair<String, MessageContainer>>)
                     }
-                    latch.await(5, TimeUnit.SECONDS)
-                    mainPresenter.chatFetched(resArr.filterNotNull() as ArrayList<Pair<String, MessageContainer>>)
                 }
-
             }
+
             override fun onCancelled(error: DatabaseError) {
                 print("err")
             }

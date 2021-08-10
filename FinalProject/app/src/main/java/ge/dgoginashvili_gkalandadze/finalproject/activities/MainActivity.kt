@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainPresenter: MainPresenter
     private lateinit var recycler: RecyclerView
     private lateinit var bottomMenu: BottomNavigationView
-    private val menuItemListener = NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
+    private val menuItemListener =
+        NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
         initMenuListener()
         recycler = findViewById(R.id.messages_recyclerview)
-        recycler.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.adapter = MainPageAdapter(this)
         mainPresenter.loadChat()
     }

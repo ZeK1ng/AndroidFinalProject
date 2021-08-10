@@ -15,7 +15,7 @@ import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.ChatInsideAdapter
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.MainPageAdapter
 
-class ChatActivity: AppCompatActivity() {
+class ChatActivity : AppCompatActivity() {
     val user = FirebaseAuth.getInstance().currentUser
     lateinit var chat: Pair<String, MessageContainer>
     lateinit var recyclerView: RecyclerView
@@ -31,7 +31,7 @@ class ChatActivity: AppCompatActivity() {
         val userName = userMail?.substring(0, userMail.indexOf('@'))
         val to = if (chat.second.talk1 == userName) chat.second.talk2 else chat.second.talk1
         recyclerView = findViewById(R.id.chat_inside_RecyclerView)
-        recyclerView.layoutManager =  LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = ChatInsideAdapter(this)
         findViewById<Button>(R.id.sendButton).setOnClickListener {
             database.child("Messages").child(chat.first).get().addOnSuccessListener {
@@ -40,7 +40,7 @@ class ChatActivity: AppCompatActivity() {
                     chat = Pair(chat.first, currChat)
                 }
                 val txt = findViewById<EditText>(R.id.messageText).text.toString()
-                val msg = Message(userName?: "",to, txt, "")
+                val msg = Message(userName ?: "", to, txt, "")
                 val list = chat.second.chat.toMutableList()
                 list.add(msg)
                 val cont = MessageContainer(list, chat.second.talk1, chat.second.talk2)

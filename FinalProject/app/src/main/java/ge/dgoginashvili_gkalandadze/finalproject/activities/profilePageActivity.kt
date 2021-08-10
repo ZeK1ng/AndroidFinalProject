@@ -30,19 +30,20 @@ class ProfilePageActivity : AppCompatActivity() {
     lateinit var avatar: ImageView
     lateinit var avatarPath: Uri
     private var bitmap: Bitmap? = null
-    lateinit var nameView:TextView
+    lateinit var nameView: TextView
     lateinit var statusView: TextView
     private lateinit var logoutButton: AppCompatButton
     private lateinit var updateButton: AppCompatButton
     private val baos = ByteArrayOutputStream()
     private lateinit var bottomMenu: BottomNavigationView
-    private val menuItemListener = NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
+    private val menuItemListener =
+        NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
 
     override fun onStart() {
         super.onStart()
         firebaseAuth = Firebase.auth
-        if(firebaseAuth.currentUser == null){
-            Log.d("authedUser",firebaseAuth.currentUser.toString())
+        if (firebaseAuth.currentUser == null) {
+            Log.d("authedUser", firebaseAuth.currentUser.toString())
             goToLogin()
         }
     }
@@ -82,10 +83,10 @@ class ProfilePageActivity : AppCompatActivity() {
         avatar.setOnClickListener {
             changeAvatar()
         }
-        logoutButton.setOnClickListener{
+        logoutButton.setOnClickListener {
             logout()
         }
-        updateButton.setOnClickListener{
+        updateButton.setOnClickListener {
             updateProfile()
         }
     }
@@ -98,7 +99,7 @@ class ProfilePageActivity : AppCompatActivity() {
 //        }
         profilePresenter.updateProfile(bitmap, newStatus)
     }
-    
+
     private fun changeAvatar() {
         val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
 //        startActivity(gallery)
@@ -133,15 +134,16 @@ class ProfilePageActivity : AppCompatActivity() {
     fun dbError(error: DatabaseError) {
         Toast.makeText(applicationContext, "Error occured", Toast.LENGTH_SHORT)
             .show();
-        Log.e("FirebaseDb Error",error.toString())
+        Log.e("FirebaseDb Error", error.toString())
     }
 
     fun updateFailed() {
         Toast.makeText(applicationContext, "Error occured on update", Toast.LENGTH_SHORT)
             .show();
-        Log.e("FirebaseDb Error","Error on update")
+        Log.e("FirebaseDb Error", "Error on update")
         statusView.error = "Error occured.Please try again"
     }
+
     private fun changeMenu(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.bottom_menu_home) {
             val intent = Intent(this, MainActivity::class.java)
