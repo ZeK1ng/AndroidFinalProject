@@ -18,6 +18,7 @@ class ChatActivity : AppCompatActivity() {
     lateinit var chat: Pair<String, MessageContainer>
     lateinit var recyclerView: RecyclerView
     val database = FirebaseDatabase.getInstance().reference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_inside)
