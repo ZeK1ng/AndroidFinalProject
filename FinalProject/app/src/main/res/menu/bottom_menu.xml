@@ -4,12 +4,11 @@
     android:id="@id/bottom_menu">
     <item
         android:id="@+id/bottom_menu_home"
-        android:title="Main"
+        android:title="@string/main"
         android:icon="@drawable/ic_home"
-        app:showAsAction="always"/>
+       />
     <item
         android:id="@+id/bottom_menu_profile"
-        android:title="Profile"
-        android:icon="@drawable/ic_profile"
-        app:showAsAction="always"/>
+        android:title="@string/profile"
+        android:icon="@drawable/ic_profile"/>
 </menu>

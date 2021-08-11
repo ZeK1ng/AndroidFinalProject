@@ -1,29 +1,32 @@
-package ge.dgoginashvili_gkalandadze.finalproject.activities
+package ge.dgoginashvili_gkalandadze.finalproject.fragment
 
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
+import ge.dgoginashvili_gkalandadze.finalproject.activities.LoginActivity
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.ProfilePresenter
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class ProfilePageActivity : AppCompatActivity() {
+class ProfilePageFragment : Fragment() {
     private var GALLERY_REQUEST_CODE = 23;
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var profilePresenter: ProfilePresenter
@@ -36,8 +39,7 @@ class ProfilePageActivity : AppCompatActivity() {
     private lateinit var updateButton: AppCompatButton
     private val baos = ByteArrayOutputStream()
     private lateinit var bottomMenu: BottomNavigationView
-    private val menuItemListener =
-        NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
+
 
     override fun onStart() {
         super.onStart()
@@ -47,19 +49,18 @@ class ProfilePageActivity : AppCompatActivity() {
             goToLogin()
         }
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_page)
-        bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
-        initMenuListener()
-        setupViews()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile_page, container, false)
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViews(view)
         setupPresenter()
         loadProfile()
-    }
-
-    private fun initMenuListener() {
-        bottomMenu.setOnItemSelectedListener(menuItemListener)
     }
 
     private fun loadProfile() {
@@ -70,12 +71,12 @@ class ProfilePageActivity : AppCompatActivity() {
         profilePresenter = ProfilePresenter(this)
     }
 
-    private fun setupViews() {
-        avatar = findViewById(R.id.avatar)
-        nameView = findViewById(R.id.profPageName)
-        statusView = findViewById(R.id.profPageStatus)
-        logoutButton = findViewById(R.id.logoutBtn)
-        updateButton = findViewById(R.id.updateButton)
+    private fun setupViews(view: View) {
+        avatar = view.findViewById(R.id.avatar)!!
+        nameView = view.findViewById(R.id.profPageName)!!
+        statusView = view.findViewById(R.id.profPageStatus)!!
+        logoutButton = view.findViewById(R.id.logoutBtn)!!
+        updateButton = view.findViewById(R.id.updateButton)!!
         setupListeners()
     }
 
@@ -108,10 +109,10 @@ class ProfilePageActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
+        if (resultCode == AppCompatActivity.RESULT_OK && requestCode == GALLERY_REQUEST_CODE) {
             avatarPath = data?.data!!
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(contentResolver, avatarPath)
+                bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, avatarPath)
                 avatar.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -126,32 +127,21 @@ class ProfilePageActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
     fun dbError(error: DatabaseError) {
-        Toast.makeText(applicationContext, "Error occured", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Error occured", Toast.LENGTH_SHORT)
             .show();
         Log.e("FirebaseDb Error", error.toString())
     }
 
     fun updateFailed() {
-        Toast.makeText(applicationContext, "Error occured on update", Toast.LENGTH_SHORT)
+        Toast.makeText(context, "Error occured on update", Toast.LENGTH_SHORT)
             .show();
         Log.e("FirebaseDb Error", "Error on update")
         statusView.error = "Error occured.Please try again"
-    }
-
-    private fun changeMenu(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == R.id.bottom_menu_home) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        } else if (menuItem.itemId == R.id.bottom_menu_profile) {
-            val intent = Intent(this, ProfilePageActivity::class.java)
-            startActivity(intent)
-        }
-        return true
     }
 }

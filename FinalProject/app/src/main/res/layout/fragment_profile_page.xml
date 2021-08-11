@@ -8,20 +8,20 @@
     android:orientation="vertical"
     android:paddingBottom="20dp"
     tools:context=".activities.LoginActivity">
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
         android:layout_width="144dp"
         android:layout_height="144dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/unisex_avatar"
-        tools:layout_editor_absoluteY="162dp"
         android:contentDescription="@string/imageContentDesc"
-        />
+        android:src="@drawable/unisex_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="162dp" />
 
     <TextView
         android:id="@+id/profPageName"
@@ -30,12 +30,12 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/roundborder"
         android:backgroundTint="@color/editTextColor"
-        android:textSize="20sp"
         android:gravity="center"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="10dp" />
+        android:paddingBottom="10dp"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/profPageStatus"
@@ -54,35 +54,24 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roundborder"
-        android:textColor="@color/white"
-        android:id="@+id/updateButton"
-        android:backgroundTint="@color/signInButton"
-        android:text="@string/UPDATE" />
+        android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/updateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:layout_marginTop="4dp"
+        android:background="@drawable/roundborder"
+        android:backgroundTint="@color/signInButton"
+        android:text="@string/UPDATE"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/roundbordersolid"
-        >
-    </androidx.appcompat.widget.AppCompatButton>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_menu"
-        android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        app:itemIconTint="@android:color/darker_gray"
-        app:itemTextColor="@android:color/darker_gray"
-        app:menu="@menu/bottom_menu" />
+        android:text="@string/logout" />
+
 </LinearLayout>

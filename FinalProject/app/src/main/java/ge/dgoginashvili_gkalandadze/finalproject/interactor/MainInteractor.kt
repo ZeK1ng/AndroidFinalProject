@@ -1,7 +1,5 @@
 package ge.dgoginashvili_gkalandadze.finalproject.interactor
 
-import android.provider.Settings
-import com.example.clientapp.models.Message
 import com.example.clientapp.models.MessageContainer
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

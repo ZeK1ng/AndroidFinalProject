@@ -1,68 +1,39 @@
-package ge.dgoginashvili_gkalandadze.finalproject.activities
+package ge.dgoginashvili_gkalandadze.finalproject
 
-import android.content.ClipData
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.clientapp.models.MessageContainer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
-import ge.dgoginashvili_gkalandadze.finalproject.R
-import ge.dgoginashvili_gkalandadze.finalproject.adapters.MainPageAdapter
-import ge.dgoginashvili_gkalandadze.finalproject.presenter.MainPresenter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import ge.dgoginashvili_gkalandadze.finalproject.adapters.ViewPagerAdapter
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainPresenter: MainPresenter
-    private lateinit var recycler: RecyclerView
+    private lateinit var viewpager: ViewPager2
     private lateinit var bottomMenu: BottomNavigationView
-    private lateinit var plbtn:FloatingActionButton
     private val menuItemListener =
         NavigationBarView.OnItemSelectedListener { menuItem -> changeMenu(menuItem) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_allchat)
-        setupPresenter()
-        bottomMenu = findViewById<BottomNavigationView>(R.id.bottom_menu)
-        plbtn = findViewById(R.id.add_person_fab)
-        plbtn.bringToFront()
+        setContentView(R.layout.activity_main)
+        viewpager = findViewById(R.id.viewpagerMain)
+        viewpager.adapter = ViewPagerAdapter(this)
+        bottomMenu = findViewById(R.id.bottom_menu)
+        bottomMenu.background = null
         initMenuListener()
-        recycler = findViewById(R.id.messages_recyclerview)
-        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recycler.adapter = MainPageAdapter(this)
-        mainPresenter.loadChat()
     }
 
     private fun initMenuListener() {
         bottomMenu.setOnItemSelectedListener(menuItemListener)
     }
 
-    private fun setupPresenter() {
-        mainPresenter = MainPresenter(this)
-    }
-
-    fun updateChats(personArray: ArrayList<Pair<String, MessageContainer>>) {
-        CoroutineScope(Dispatchers.Main).async {
-            (recycler.adapter as MainPageAdapter).setHistory(personArray)
-        }
-    }
 
     private fun changeMenu(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == R.id.bottom_menu_home) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            viewpager.currentItem = viewpager.currentItem - 1
         } else if (menuItem.itemId == R.id.bottom_menu_profile) {
-            val intent = Intent(this, ProfilePageActivity::class.java)
-            startActivity(intent)
+            viewpager.currentItem = viewpager.currentItem + 1
         }
         return true
     }

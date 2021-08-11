@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import ge.dgoginashvili_gkalandadze.finalproject.MainActivity
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.RegisterPresenter
 
@@ -119,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun loadUserpageActivity() {
-        val intent = Intent(this, ProfilePageActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK xor Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

@@ -1,7 +1,6 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.ChatInsideAdapter
-import ge.dgoginashvili_gkalandadze.finalproject.adapters.MainPageAdapter
 
 class ChatActivity : AppCompatActivity() {
     val user = FirebaseAuth.getInstance().currentUser

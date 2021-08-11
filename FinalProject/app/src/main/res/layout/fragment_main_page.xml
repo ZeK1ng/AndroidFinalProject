@@ -47,34 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="20dp"
-        app:fabCradleVerticalOffset="8dp">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_menu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom|center"
-            android:layout_marginEnd="16dp"
-            app:menu="@menu/bottom_menu" />
-    </com.google.android.material.bottomappbar.BottomAppBar>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_person_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="91dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/button_color"
-        android:src="@drawable/ic_add"
-        app:fabSize="normal"
-        app:layout_anchor="@id/bottomAppBar" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

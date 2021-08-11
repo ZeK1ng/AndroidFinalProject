@@ -2,20 +2,18 @@ package ge.dgoginashvili_gkalandadze.finalproject.interactor
 
 import android.graphics.Bitmap
 import android.util.Log
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import ge.dgoginashvili_gkalandadze.finalproject.dataModel.UserData
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.ProfilePresenter
 import java.io.ByteArrayOutputStream
-import com.google.firebase.storage.FirebaseStorage
-
-import com.google.android.gms.tasks.OnSuccessListener
-
-import com.google.android.gms.tasks.OnFailureListener
 
 
 class ProfileInteractor(val profilePresenter: ProfilePresenter) {
