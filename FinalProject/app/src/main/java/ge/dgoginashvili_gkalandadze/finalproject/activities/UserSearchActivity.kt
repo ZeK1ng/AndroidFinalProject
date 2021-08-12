@@ -55,10 +55,6 @@ class UserSearchActivity : AppCompatActivity() {
     }
 
     fun usersFetched(data: ArrayList<Pair<String, String>>) {
-        Log.d("users",data.toString())
         (recycler.adapter as UserSearchAdapter).setData(data)
-//        CoroutineScope(Dispatchers.Main).async {
-//            (recycler.adapter as UserSearchAdapter).setData(data)
-//        }
     }
 }

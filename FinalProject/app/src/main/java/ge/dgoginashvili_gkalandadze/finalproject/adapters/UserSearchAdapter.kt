@@ -28,7 +28,6 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        Log.d("index",position.toString())
         holder.nickname.text = usersData[position].first
         holder.status.text = usersData[position].second
         holder.itemView.setOnClickListener {
@@ -50,7 +49,6 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
     }
 
     fun setData(data:ArrayList<Pair<String,String>>){
-        Log.d("dataa",data.toString())
         usersData = data
         notifyDataSetChanged()
     }
