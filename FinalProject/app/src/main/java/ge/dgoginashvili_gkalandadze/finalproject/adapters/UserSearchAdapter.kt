@@ -1,6 +1,7 @@
 package ge.dgoginashvili_gkalandadze.finalproject.adapters
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        Log.d("index",position.toString())
         holder.nickname.text = usersData[position].first
         holder.status.text = usersData[position].second
         holder.itemView.setOnClickListener {
@@ -48,6 +50,7 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
     }
 
     fun setData(data:ArrayList<Pair<String,String>>){
+        Log.d("dataa",data.toString())
         usersData = data
         notifyDataSetChanged()
     }
@@ -55,7 +58,7 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
 
 class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var avatar = itemView.findViewById<ImageView>(R.id.profileImage)
-    var nickname = itemView.findViewById<TextView>(R.id.name)
-    var status = itemView.findViewById<TextView>(R.id.status)
+    var nickname = itemView.findViewById<TextView>(R.id.profileName)
+    var status = itemView.findViewById<TextView>(R.id.profileStatus)
 
 }

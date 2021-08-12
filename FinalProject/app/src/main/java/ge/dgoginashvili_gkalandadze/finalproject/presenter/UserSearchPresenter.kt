@@ -9,4 +9,8 @@ class UserSearchPresenter(val userSearchActivity: UserSearchActivity) {
     fun loadUsers() {
         userSearchInteractor.loadUsers()
     }
+
+    fun usersFetched(data: ArrayList<Pair<String, String>>) {
+        userSearchActivity.usersFetched(data)
+    }
 }

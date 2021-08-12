@@ -9,17 +9,18 @@ import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.UserSearchPresenter
 
 class UserSearchInteractor(val UserSearchPresenter:UserSearchPresenter) {
+    //Aqedan ro wamovigeb datas unda wavigo activitimde rogor list<pair<string,string>> da maqedan mere recycleris funqcia gamovidzaxo.
     fun loadUsers() {
         val dbase = Firebase.database.getReference("Users")
         dbase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-//                for (child in snapshot.children) {
-//                    if (child.child("username").value == userName) {
-//                        val status = child.child("status").value.toString()
-//                        Log.d("RRRR", "HMMMM")
-//                        profilePresenter.loadProfileData(userName, status)
-//                    }
-//                }
+                val data = arrayListOf<Pair<String,String>>()
+                for (child in snapshot.children) {
+                    val name = child.child("username").value.toString()
+                    val status = child.child("status").value.toString()
+                    data.add(Pair(name,status))
+                }
+                UserSearchPresenter.usersFetched(data)
             }
 
             override fun onCancelled(error: DatabaseError) {

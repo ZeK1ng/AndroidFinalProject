@@ -1,6 +1,7 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,9 @@ import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.MainPageAdapter
 import ge.dgoginashvili_gkalandadze.finalproject.adapters.UserSearchAdapter
 import ge.dgoginashvili_gkalandadze.finalproject.presenter.UserSearchPresenter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 
 class UserSearchActivity : AppCompatActivity() {
     private lateinit var searcher: SearchView
@@ -48,5 +52,13 @@ class UserSearchActivity : AppCompatActivity() {
 
     private fun searcherClicked() {
         searcher.isIconified = false;
+    }
+
+    fun usersFetched(data: ArrayList<Pair<String, String>>) {
+        Log.d("users",data.toString())
+        (recycler.adapter as UserSearchAdapter).setData(data)
+//        CoroutineScope(Dispatchers.Main).async {
+//            (recycler.adapter as UserSearchAdapter).setData(data)
+//        }
     }
 }
