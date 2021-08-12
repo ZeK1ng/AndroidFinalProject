@@ -47,7 +47,6 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:scrollHorizontally="true"
-                android:text="Giorgi Kalandadze"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="24sp"
