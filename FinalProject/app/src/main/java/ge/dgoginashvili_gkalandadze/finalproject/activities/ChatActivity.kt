@@ -69,17 +69,9 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.scrollToPosition(chat.chat.size - 1)
         (recyclerView.adapter as ChatInsideAdapter).setData(Pair("",chat))
         chatUserName.text = to
-        val dbase = Firebase.database.getReference("Users")
-        dbase.child(to).get().addOnSuccessListener { snapshot ->
-            var userval = snapshot.value.toString()
-            userval = userval.substring(1, userval.length - 1)
-            val map = userval.split(",").associate {
-                val (left, right) = it.split("=")
-                left to right
-            }
-            chatUserStatus.text = map["status"]
-        }
+        setStatus(to)
     }
+
 
     private fun handleExistedChat(userName: String?) {
         val bndl = intent.extras
@@ -88,19 +80,7 @@ class ChatActivity : AppCompatActivity() {
         (recyclerView.adapter as ChatInsideAdapter).setData(chat)
         val to = if (chat.second.talk1 == userName) chat.second.talk2 else chat.second.talk1
         chatUserName.text = to
-
-        val dbase = Firebase.database.getReference("Users")
-        dbase.child(to).get().addOnSuccessListener { snapshot ->
-            var userval = snapshot.value.toString()
-            userval = userval.substring(1, userval.length - 1)
-            val map = userval.split(",").associate {
-                val (left, right) = it.split("=")
-                left to right
-            }
-            chatUserStatus.text = map["status"]
-        }
-
-
+        setStatus(to)
         findViewById<Button>(R.id.sendButton).setOnClickListener {
             database.child("Messages").child(chat.first).get().addOnSuccessListener {
                 val currChat = it.getValue(MessageContainer::class.java)
@@ -124,4 +104,17 @@ class ChatActivity : AppCompatActivity() {
             }
         }
     }
+    private fun setStatus(to: String) {
+        val dbase = Firebase.database.getReference("Users")
+        dbase.child(to).get().addOnSuccessListener { snapshot ->
+            var userval = snapshot.value.toString()
+            userval = userval.substring(1, userval.length - 1)
+            val map = userval.split(",").associate {
+                val (left, right) = it.split("=")
+                left to right
+            }
+            chatUserStatus.text = map["status"]
+        }
+    }
+
 }
