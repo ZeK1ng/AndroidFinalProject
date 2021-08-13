@@ -20,7 +20,6 @@ import ge.dgoginashvili_gkalandadze.finalproject.adapters.ChatInsideAdapter
 
 class ChatActivity : AppCompatActivity() {
     val user = FirebaseAuth.getInstance().currentUser
-    lateinit var chat: Pair<String, MessageContainer>
     lateinit var recyclerView: RecyclerView
     val database = FirebaseDatabase.getInstance().reference
     private lateinit var chatUserName: AppCompatTextView
@@ -30,35 +29,23 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_inside)
         setupRecView()
-        setupChat(savedInstanceState)
+        setupChat()
 
 
     }
 
-    private fun setupChat(savedInstanceState: Bundle?) {
+    private fun setupChat() {
         chatUserName = findViewById(R.id.chat_user_name)
         chatUserStatus = findViewById(R.id.chat_user_status)
-        val newChat = getChatType(savedInstanceState)
+        val newChat = getChatType()
         val userMail = user?.email
         val userName = userMail?.substring(0, userMail.indexOf('@'))
-        val to = if (chat.second.talk1 == userName) chat.second.talk2 else chat.second.talk1
-        chatUserName.text = to
-        val dbase = Firebase.database.getReference("Users")
-        dbase.child(to).get().addOnSuccessListener { snapshot ->
-            var userval = snapshot.value.toString()
-            userval = userval.substring(1,userval.length-1)
-            val map = userval.split(",").associate {
-                val (left, right) = it.split("=")
-                left to right
-            }
-            chatUserStatus.text = map["status"]
-        }
-
-        if (!newChat) {
-            handleExistedChat(userName, to)
-        } else {
+        if (!newChat){
+            handleExistedChat(userName)
+        }else{
             handleNewChat()
         }
+
     }
 
     private fun setupRecView() {
@@ -67,24 +54,35 @@ class ChatActivity : AppCompatActivity() {
         recyclerView.adapter = ChatInsideAdapter(this)
     }
 
-    private fun getChatType(savedInstanceState: Bundle?): Boolean {
-        if (savedInstanceState == null) {
-            val bndl = intent.extras
-            if (bndl?.getBoolean("newChat") == false) {
-                chat = bndl.getSerializable("chat") as Pair<String, MessageContainer>
-                recyclerView.scrollToPosition(chat.second.chat.size - 1)
-            } else {
-                return true
-            }
-        }
-        return false
+    private fun getChatType(): Boolean {
+        val bndl = intent.extras
+        return bndl?.getBoolean("newChat")!!
     }
 
     private fun handleNewChat() {
-        return
+
     }
 
-    private fun handleExistedChat(userName: String?, to: String) {
+    private fun handleExistedChat(userName: String?) {
+        val bndl = intent.extras
+        var chat = bndl?.getSerializable("chat") as Pair<String, MessageContainer>
+        recyclerView.scrollToPosition(chat.second.chat.size - 1)
+        (recyclerView.adapter as ChatInsideAdapter).setData(chat)
+        val to = if (chat.second.talk1 == userName) chat.second.talk2 else chat.second.talk1
+        chatUserName.text = to
+
+        val dbase = Firebase.database.getReference("Users")
+        dbase.child(to).get().addOnSuccessListener { snapshot ->
+            var userval = snapshot.value.toString()
+            userval = userval.substring(1, userval.length - 1)
+            val map = userval.split(",").associate {
+                val (left, right) = it.split("=")
+                left to right
+            }
+            chatUserStatus.text = map["status"]
+        }
+
+
         findViewById<Button>(R.id.sendButton).setOnClickListener {
             database.child("Messages").child(chat.first).get().addOnSuccessListener {
                 val currChat = it.getValue(MessageContainer::class.java)
@@ -101,12 +99,11 @@ class ChatActivity : AppCompatActivity() {
                 val updates = hashMapOf<String, Any>(
                     "/Messages/${chat.first}" to mapMsg
                 )
-                (recyclerView.adapter as ChatInsideAdapter).notifyDataSetChanged()
+                (recyclerView.adapter as ChatInsideAdapter).setData(chat)
                 recyclerView.scrollToPosition(chat.second.chat.size - 1)
                 database.updateChildren(updates)
             }.addOnFailureListener {
             }
         }
-
     }
 }

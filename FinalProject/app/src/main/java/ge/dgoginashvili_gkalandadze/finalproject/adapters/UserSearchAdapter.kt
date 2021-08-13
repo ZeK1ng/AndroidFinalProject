@@ -11,6 +11,8 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clientapp.models.MessageContainer
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.activities.ChatActivity
 import ge.dgoginashvili_gkalandadze.finalproject.activities.UserSearchActivity
@@ -32,13 +34,15 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
         holder.status.text = usersData[position].second
         holder.itemView.setOnClickListener {
             val int = Intent(UserSearchActivity.applicationContext, ChatActivity::class.java)
-            val pr :Pair<String, MessageContainer>
+            Firebase.database.getReference("Messages").get().addOnSuccessListener {
+                Log.d("data",it.value.toString())
+            }
+            int.putExtra("newChat",true)
             val msgCont = MessageContainer()
             msgCont.chat = arrayListOf()
             msgCont.talk1 = usersData[position].first
             msgCont.talk2 = userName!!
-            pr = Pair(userName,msgCont)
-            val bndl = bundleOf("chat" to pr)
+            val bndl = bundleOf("msgCont" to msgCont)
             int.putExtras(bndl)
             UserSearchActivity.startActivity(int)
         }
