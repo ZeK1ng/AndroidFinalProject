@@ -78,8 +78,6 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
         msgCont.talk2 = userName!!
         val bndl = bundleOf("msgCont" to msgCont)
         int.putExtras(bndl)
-
-
         UserSearchActivity.startActivity(int)
     }
 
