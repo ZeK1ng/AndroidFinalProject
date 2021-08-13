@@ -33,26 +33,50 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
         holder.nickname.text = usersData[position].first
         holder.status.text = usersData[position].second
         holder.itemView.setOnClickListener {
-            val int = Intent(UserSearchActivity.applicationContext, ChatActivity::class.java)
+            var chatExists = false
             Firebase.database.getReference("Messages").get().addOnSuccessListener {
-                Log.d("data",it.value.toString())
+                val data = it.value as ArrayList<HashMap<String, String>>
+                data.removeFirstOrNull()
+                Log.d("data", data.toString())
+
+                for (dt in data) {
+                    if ((dt["talk1"] == userName && dt["talk2"] == usersData[position].first) || (dt["talk2"] == userName && dt["talk1"] == usersData[position].first)) {
+                        chatExists = true
+                        stuff1()
+                    }
+                }
+                if (!chatExists) {
+                    stuff2(position)
+                }
             }
-            int.putExtra("newChat",true)
-            val msgCont = MessageContainer()
-            msgCont.chat = arrayListOf()
-            msgCont.talk1 = usersData[position].first
-            msgCont.talk2 = userName!!
-            val bndl = bundleOf("msgCont" to msgCont)
-            int.putExtras(bndl)
-            UserSearchActivity.startActivity(int)
         }
+    }
+
+    private fun stuff2(position: Int) {
+        val int = Intent(UserSearchActivity.applicationContext, ChatActivity::class.java)
+        Log.d("Chat", "NEwwww")
+        int.putExtra("newChat", true)
+        val msgCont = MessageContainer()
+        msgCont.chat = arrayListOf()
+        msgCont.talk1 = usersData[position].first
+        msgCont.talk2 = userName!!
+        val bndl = bundleOf("msgCont" to msgCont)
+        int.putExtras(bndl)
+
+
+        UserSearchActivity.startActivity(int)
+    }
+
+    private fun stuff1() {
+        Log.d("Chat", "Existss")
+
     }
 
     override fun getItemCount(): Int {
         return usersData.size
     }
 
-    fun setData(data:ArrayList<Pair<String,String>>){
+    fun setData(data: ArrayList<Pair<String, String>>) {
         usersData = data
         notifyDataSetChanged()
     }

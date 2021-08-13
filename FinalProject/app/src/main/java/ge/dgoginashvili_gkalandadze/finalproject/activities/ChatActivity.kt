@@ -1,8 +1,6 @@
 package ge.dgoginashvili_gkalandadze.finalproject.activities
 
 import android.os.Bundle
-import android.service.autofill.UserData
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +41,7 @@ class ChatActivity : AppCompatActivity() {
         if (!newChat){
             handleExistedChat(userName)
         }else{
-            handleNewChat()
+            handleNewChat(userName)
         }
 
     }
@@ -59,8 +57,28 @@ class ChatActivity : AppCompatActivity() {
         return bndl?.getBoolean("newChat")!!
     }
 
-    private fun handleNewChat() {
-
+    private fun handleNewChat(userName: String?) {
+        val bndl = intent.extras
+        var chat = bndl?.getSerializable("msgCont") as MessageContainer
+        var to = ""
+        if(chat.talk1 == userName){
+            to = chat.talk2
+        }else{
+            to = chat.talk1
+        }
+        recyclerView.scrollToPosition(chat.chat.size - 1)
+        (recyclerView.adapter as ChatInsideAdapter).setData(Pair("",chat))
+        chatUserName.text = to
+        val dbase = Firebase.database.getReference("Users")
+        dbase.child(to).get().addOnSuccessListener { snapshot ->
+            var userval = snapshot.value.toString()
+            userval = userval.substring(1, userval.length - 1)
+            val map = userval.split(",").associate {
+                val (left, right) = it.split("=")
+                left to right
+            }
+            chatUserStatus.text = map["status"]
+        }
     }
 
     private fun handleExistedChat(userName: String?) {
