@@ -26,15 +26,23 @@
                 android:layout_marginEnd="30dp"
                 android:src="@drawable/unisex_avatar" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/back"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
-                app:layout_collapseMode="pin"/>
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/back"-->
+<!--                android:layout_width="36dp"-->
+<!--                android:layout_height="36dp"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:backgroundTint="@color/black"-->
+<!--                android:textColor="@color/white"-->
+<!--                app:layout_collapseMode="pin"/>-->
 
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/previous" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/chat_user_name"
