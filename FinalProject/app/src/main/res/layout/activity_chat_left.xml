@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="96dp"
         android:padding="30dp"
-        android:background="@drawable/roundborder"
+        android:background="@drawable/recieved_shape"
         android:text="Hi I am message send from your friend"
         android:textAlignment="viewStart"
         android:textColor="@color/other_message_text_color"

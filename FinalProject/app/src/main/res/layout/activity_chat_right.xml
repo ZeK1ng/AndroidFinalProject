@@ -13,7 +13,7 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/roundborderright"
+        android:background="@drawable/sent_shape"
         android:padding="30dp"
         android:text="Hi I am message sent from sender nice to meet you"
         android:textAlignment="viewStart"
