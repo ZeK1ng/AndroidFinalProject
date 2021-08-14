@@ -19,7 +19,7 @@
         android:layout_width="144dp"
         android:layout_height="144dp"
         android:contentDescription="@string/imageContentDesc"
-        android:src="@drawable/unisex_avatar"
+        android:src="@drawable/avatar_image_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="162dp" />
 

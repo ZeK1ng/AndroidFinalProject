@@ -69,6 +69,27 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
     }
 
     private fun stuff2(position: Int) {
+        val dbase = Firebase.database.getReference("Messages")
+        dbase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var res = 0
+                for (child in snapshot.children) {
+                    Log.d("childKey",child.key.toString())
+
+                    val key = child.key!!.toInt()
+                    if(child.key!!.toInt() > res){
+                        res  = key
+                    }
+                }
+                startChat(res,position)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+
+    }
+    private fun startChat(res: Int, position: Int) {
         val int = Intent(UserSearchActivity.applicationContext, ChatActivity::class.java)
         Log.d("Chat", "NEwwww")
         int.putExtra("newChat", true)
@@ -78,6 +99,8 @@ class UserSearchAdapter(val UserSearchActivity: UserSearchActivity) :
         msgCont.talk2 = userName!!
         val bndl = bundleOf("msgCont" to msgCont)
         int.putExtras(bndl)
+        val nextChatIndex = res+1
+        int.putExtra("nextChatIndex",nextChatIndex.toString())
         UserSearchActivity.startActivity(int)
     }
 
