@@ -33,3 +33,6 @@ data class MessageContainer (
         )
     }
 }
+data class MessageContainerList(var data:List<MessageContainer>):Serializable {
+    val length: Int = data.size
+}

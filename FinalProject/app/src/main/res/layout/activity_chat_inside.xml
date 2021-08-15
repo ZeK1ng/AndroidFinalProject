@@ -24,7 +24,7 @@
                 android:layout_height="80dp"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginEnd="30dp"
-                android:src="@drawable/unisex_avatar" />
+                android:src="@drawable/avatar_image_placeholder" />
 
 <!--            <androidx.appcompat.widget.AppCompatButton-->
 <!--                android:id="@+id/back"-->

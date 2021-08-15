@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:src="@drawable/unisex_avatar"
+        android:src="@drawable/avatar_image_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

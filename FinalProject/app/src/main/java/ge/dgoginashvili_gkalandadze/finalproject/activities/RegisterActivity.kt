@@ -104,6 +104,10 @@ class RegisterActivity : AppCompatActivity() {
             nameText.error = "Please Enter name"
             return false
         }
+        if(name.contains(" ")){
+            nameText.error = "Space not valid in name"
+            return false
+        }
         if (TextUtils.isEmpty(pass)) {
             passwordText.error = "Please Enter Password"
             return false
@@ -112,8 +116,8 @@ class RegisterActivity : AppCompatActivity() {
             workStatus.error = "Please Enter your status"
             return false
         }
-        if (pass.length < 5) {
-            passwordText.error = "Password lenght must be 5 or more"
+        if (pass.length < 6) {
+            passwordText.error = "Password lenght must be 6 or more"
             return false
         }
         return true

@@ -2,6 +2,7 @@ package ge.dgoginashvili_gkalandadze.finalproject.interactor
 
 import android.graphics.Bitmap
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
