@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clientapp.models.MessageContainer
 import com.example.clientapp.recycler.ChatMessageLeftViewHolder
 import com.example.clientapp.recycler.ChatMessageRightViewHolder
 import ge.dgoginashvili_gkalandadze.finalproject.R
 import ge.dgoginashvili_gkalandadze.finalproject.activities.ChatActivity
 
 class ChatInsideAdapter (private val activity: ChatActivity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var chat :Pair<String,MessageContainer> = Pair("",MessageContainer())
 
     override fun getItemViewType(position: Int): Int {
-        if(activity.chat.second.chat[position].from != activity.user?.email?.let { it.substring(0, it.indexOf('@')) }) {
+        if(chat.second.chat[position].from != activity.user?.email?.let { it.substring(0, it.indexOf('@')) }) {
             return 1
         }
         return 0
@@ -28,17 +30,20 @@ class ChatInsideAdapter (private val activity: ChatActivity) : RecyclerView.Adap
     }
 
     override fun getItemCount(): Int {
-        return activity.chat.second.chat.size
+        return chat.second.chat.size
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(getItemViewType(position) == 0) {
-            (holder as ChatMessageRightViewHolder).message.text = activity.chat.second.chat[position].text
+            (holder as ChatMessageRightViewHolder).message.text = chat.second.chat[position].text
         } else {
-            (holder as ChatMessageLeftViewHolder).message.text = activity.chat.second.chat[position].text
+            (holder as ChatMessageLeftViewHolder).message.text = chat.second.chat[position].text
         }
     }
-
+    fun setData(c:Pair<String,MessageContainer>){
+        chat = c
+        notifyDataSetChanged()
+    }
 
 }
