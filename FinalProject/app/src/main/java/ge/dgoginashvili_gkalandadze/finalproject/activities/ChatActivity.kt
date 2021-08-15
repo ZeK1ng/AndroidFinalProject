@@ -34,10 +34,15 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_inside)
         setupRecView()
         setupChat()
+        setupToolbar()
 
 
     }
-
+    private fun setupToolbar() {
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            onBackPressed()
+        }
+    }
     private fun setupChat() {
         chatUserName = findViewById(R.id.chat_user_name)
         chatUserStatus = findViewById(R.id.chat_user_status)

@@ -26,14 +26,13 @@
                 android:layout_marginEnd="30dp"
                 android:src="@drawable/avatar_image_placeholder" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/back"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_margin="8dp"
-                android:backgroundTint="@color/black"
-                android:textColor="@color/white"
-                app:layout_collapseMode="pin"/>
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/previous" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -75,8 +74,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="478dp"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="90dp"
         app:layout_anchorGravity="center">
 
@@ -119,13 +119,13 @@
             android:layout_height="30dp"
             android:layout_gravity="center|right"
             android:layout_marginEnd="15dp"
-            android:backgroundTint="@color/new_message_circle" />
+            android:background="@drawable/circle_shape" />
 
         <EditText
             android:id="@+id/messageText"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/other_message_box_background"
+            android:layout_height="48dp"
+            android:background="@drawable/oval_shape"
             android:hint="Message"
             android:inputType="textPersonName"
             android:lineSpacingExtra="8dp"
